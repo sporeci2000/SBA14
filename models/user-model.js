@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
 
 // Middleware: hash password if new/modified
 userSchema.pre('save', async function (next) {
-    if (this.isModified('password')) {
+    if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
     }

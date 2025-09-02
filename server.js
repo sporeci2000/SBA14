@@ -6,6 +6,9 @@ require('./config/db-connection')
 
 const express = require('express');
 
+const authRouter = require('./routes/users-route');
+const bookmarkRouter = require('./routes/bookmarks-route');
+
 // Invoke that imported express method to create a new Express application, and I'm storing it inside of this variable app
 const app = express();
 

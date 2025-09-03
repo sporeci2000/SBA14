@@ -23,7 +23,10 @@ const userSchema = new mongoose.Schema(
         // For local authentication
         password: {
             type: String,
-            required: [true, 'Password is required.'],
+            // only required if no GitHub login
+            required: function () {
+                return !this.githubId;
+            },
             minlength: [8, 'Password must be at least 8 characters long.'],
             select: false, // don’t return password by default
         },
@@ -32,7 +35,6 @@ const userSchema = new mongoose.Schema(
         githubId: {
             type: String,
             unique: true,
-            sparse: true, // allows multiple docs without githubId
         }
     },
     { timestamps: true }

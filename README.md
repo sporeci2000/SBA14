@@ -11,3 +11,9 @@ Bookmark Management
 Create, Read, Update, Delete (CRUD) bookmarks.   
 Ownership-based Authorization: Users can only view or modify their own bookmarks.   
 Secure Endpoints: All bookmark endpoints protected by authentication middleware.  
+
+The most challenging part of this project was implementing a secure authentication and authorization system that combines both local JWT-based login and GitHub OAuth login. Handling JWTs correctly required ensuring tokens were signed properly during registration and login, verified on every protected route, and set to expire appropriately. Integrating GitHub OAuth added complexity, as it involved registering the app on GitHub, managing client credentials, handling callback URLs, and creating new users on the fly if they didn’t already exist. On top of that, securing the Bookmark API endpoints required implementing strict authorization checks so that users could only access, update, or delete their own bookmarks. Balancing these multiple layers of security, while maintaining smooth user experience and proper middleware flow, was the most difficult but crucial aspect of the project.
+
+REFERENCES:
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/mongoose
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS

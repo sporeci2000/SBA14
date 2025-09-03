@@ -1,6 +1,8 @@
 // Load environment variables
 require('dotenv').config();
 
+const passport = require('passport');
+
 // DB connection
 require('./config/db-connection')
 
@@ -17,9 +19,14 @@ const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON
 app.use(express.json());
 
+app.use(passport.initialize());
+
 app.use('/api/users', authRouter);
 app.use('/api/bookmarks', bookmarkRouter);
 
+// load strategies
+require('./config/jwt-strategy');
+require('./config/github-strategy');
 
 // Get our server running
 app.listen(PORT, () => {
